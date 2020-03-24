@@ -23,7 +23,7 @@ class App:
     def draw(self):
         pyxel.cls(0)
         pyxel.text(55, 41, "Hello, Pyxel!", 8)
-        pyxel.blt(self.position["x"], self.position["y"], 0, 9, 0, 6, 7)
+        pyxel.blt(self.position["x"], self.position["y"], 0, 9, 0, 6, 7, colkey=1)
 
 
 App()
