@@ -1,4 +1,5 @@
 import pyxel
+import sys
 
 
 class App:
@@ -8,6 +9,16 @@ class App:
         self.position = {"x": 66, "y": 66}
         self.direction = "left"
         pyxel.run(self.update, self.draw)
+
+    def draw_main_character(self):
+        sprite = {"left": 9, "right": 17,
+                  "up": 33, "down": 25}
+        sys.stdout.write("\rx :{}, y:{}".format(
+            self.position["x"], self.position["y"]))
+        sys.stdout.flush()
+        pyxel.blt(self.position["x"],
+                  self.position["y"], 0,
+                  sprite[self.direction], 0, 6, 7, colkey=1)
 
     def update(self):
         if pyxel.btnp(pyxel.KEY_Q):
@@ -28,18 +39,7 @@ class App:
     def draw(self):
         pyxel.cls(0)
         pyxel.text(55, 41, "Dungeon DOS", 8)
-        if self.direction == "left":
-            pyxel.blt(self.position["x"],
-                      self.position["y"], 0, 9, 0, 6, 7, colkey=1)
-        elif self.direction == "right":
-            pyxel.blt(self.position["x"],
-                      self.position["y"], 0, 17, 0, 6, 7, colkey=1)
-        elif self.direction == "up":
-            pyxel.blt(self.position["x"],
-                      self.position["y"], 0, 33, 0, 6, 7, colkey=1)
-        elif self.direction == "down":
-            pyxel.blt(self.position["x"],
-                      self.position["y"], 0, 25, 0, 6, 7, colkey=1)
+        self.draw_main_character()
 
 
 App()
