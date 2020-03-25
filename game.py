@@ -16,7 +16,7 @@ class App:
                             {"x": 100, "y": 90},
                             {"x": 120, "y": 90},
                             {"x": 20, "y": 90},
-                            {"x": 90, "y": 20},]
+                            {"x": 90, "y": 20}]
         pyxel.run(self.update, self.draw)
 
     def log_handler(self, text):
