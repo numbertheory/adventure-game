@@ -1,0 +1,12 @@
+default: ""
+mv_boulders:
+    - x: 50
+      y: 50
+door_info:
+    - x: 64
+      y: 112
+      door_type: "south"
+      gate:
+        scene_name: "start_map"
+        x: 10
+        y: 10

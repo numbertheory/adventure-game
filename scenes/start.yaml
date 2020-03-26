@@ -1,0 +1,41 @@
+position:
+    x: 66
+    y: 66
+direction: "left"
+texts:
+    - x: 55
+      y: 41
+      text: "Dungeon DOS"
+      color: 8
+mv_boulders:
+    - x: 50
+      y: 50
+    - x: 90
+      y: 90
+    - x: 50
+      y: 90
+    - x: 60
+      y: 10
+    - x: 100
+      y: 90
+    - x: 120
+      y: 90
+    - x: 20
+      y: 90
+    - x: 90
+      y: 20
+door_info:
+    - x: 64
+      y: 0
+      door_type: "north"
+      gate:
+        scene_name: "stage_two"
+        x: 64
+        y: 100
+    - x: 152
+      y: 40
+      door_type: "east"
+      gate:
+        scene_name: "stage_three"
+        x: 10
+        y: 65
