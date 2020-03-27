@@ -2,6 +2,27 @@
 
 A quick exploration using [Pyxel](https://github.com/kitao/pyxel/blob/master/README.md).
 
+# Running the Binaries
+
+On Mac and Linux, you will need to install some of the libraries that developers use in order to run the binary distributions. See below:
+
+## Ubuntu
+
+On Ubuntu (and other Ubuntu distros), run this command:
+
+```
+sudo apt install libsdl2-dev libsdl2-image-dev
+```
+
+## MacOS
+
+With Homebrew, run this command:
+
+```
+brew install sdl2 sdl2_image
+```
+
+
 # Development Setup
 
 Create a virtualenvironment with `python3.7` as the python executable. Pyxel relies on some C libraries to work, so Python 3.7 is important. Don't upgrade your root system's python, install python3.7 and then point to that executable when making the virtualenvironment.
