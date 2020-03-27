@@ -18,3 +18,7 @@ pyinstaller --clean --noconfirm --log-level=WARN --onefile --noconsole --name=du
 game.py
 
 cp -r $PWD/scenes/ dist/
+
+mv dist/ dungeon-dos/
+
+zip -r dungeon-dos.zip dungeon-dos/*
