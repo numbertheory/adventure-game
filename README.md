@@ -27,7 +27,7 @@ brew install sdl2 sdl2_image
 
 Create a virtualenvironment with `python3.7` as the python executable. Pyxel relies on some C libraries to work, so Python 3.7 is important. Don't upgrade your root system's python, install python3.7 and then point to that executable when making the virtualenvironment.
 
-I highly reccommend using [virtualenvwrapper](https://pypi.org/project/virtualenvwrapper/), as it centralizes where virtualenvs are on your system and allows you to use simple commands to activate them.
+I highly recommend using [virtualenvwrapper](https://pypi.org/project/virtualenvwrapper/), as it centralizes where virtualenvs are on your system and allows you to use simple commands to activate them.
 
 ```
 mkvirtualenv --python=$(which python3.7) dungeon-dos
