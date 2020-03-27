@@ -1,6 +1,6 @@
 import pyxel
 import sys
-from util.collision import collision_detect, detect_door, get_character_bubble
+from util.collision import collision_detect, detect_door
 import util.draw as draw
 import util.load_scene as scene
 
