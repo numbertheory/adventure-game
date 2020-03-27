@@ -12,5 +12,5 @@ door_info:
       door_type: "south"
       gate:
         scene_name: "start_map"
-        x: 10
+        x: 64
         y: 10

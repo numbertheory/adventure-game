@@ -21,4 +21,6 @@ cp -r $PWD/scenes/ dist/
 
 mv dist/ dungeon-dos/
 
-zip -r dungeon-dos.zip dungeon-dos/*
+tag=$(git describe --tags)
+
+zip -r dungeon-dos-$tag.zip dungeon-dos/*
