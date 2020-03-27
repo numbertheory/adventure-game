@@ -8,3 +8,6 @@ clean:
 
 linux:
 	./release/release_linux.sh
+
+mac:
+	./release/release_mac.sh
