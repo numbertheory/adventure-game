@@ -1,4 +1,8 @@
-default: ""
+texts:
+    - x: 55
+      y: 41
+      text: "SECRET CHAMBER"
+      color: 4
 mv_boulders:
     - x: 50
       y: 50
