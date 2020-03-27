@@ -95,7 +95,6 @@ class App:
 
     def draw_scene(self):
         pyxel.cls(0)
-        self.log_handler(self.position)
         if not self.scene_setup:
             self.initialize_scene()
         # Borders around the playable arena
