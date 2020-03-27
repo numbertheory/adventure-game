@@ -4,6 +4,7 @@ clean:
 	rm -rf dist/
 	rm -f dungeon-dos.spec
 	rm -rf dungeon-dos/
+	rm -f dungeon-dos.zip
 
 linux:
 	./release/release_linux.sh
