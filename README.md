@@ -34,6 +34,21 @@ mkvirtualenv --python=$(which python3.7) dungeon-dos
 pip install -r requirements.txt
 ```
 
+# Controls
+
++-----------------+-----------------------------+
+| Arrow keys      | Move character (N, S, E, W) |
++-----------------+-----------------------------+
+| Left Shift Key  | Pull nearby stone           |
++-----------------+-----------------------------+
+
+Note: To pull a stone, hold down the left shift key and move
+with the arrow keys which will drag the stone behind you. Not
+all surfaces of the stone will accept the pull. This is an
+accident of how the feature was implemented, but I like the mechanic
+as pulling a huge boulder takes a bit more effort than pushing one.
+
+
 # License
 
 This dungeon game is under [MIT license](https://opensource.org/licenses/MIT). It can be reused within proprietary software provided that all copies of the licensed software include a copy of the MIT License terms and the copyright notice.
