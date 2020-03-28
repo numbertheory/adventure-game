@@ -3,12 +3,14 @@ import sys
 from util.collision import collision_detect, detect_door
 import util.draw as draw
 import util.load_scene as scene
+from util.load_world import all_boulders
 
 
 class App:
     def __init__(self):
         pyxel.init(160, 120, caption="Dungeon DOS")
         pyxel.load("assets/image_map.pyxres")
+        self.all_boulders = all_boulders()
         self.scene_name = "start"
         self.scene_setup = False
         self.from_door = False
@@ -31,6 +33,10 @@ class App:
 
     def update(self):
         # These controls do not work outside of this main App class.
+        if self.scene_name == "start":
+            boulder_key = "start_map"
+        else:
+            boulder_key = self.scene_name
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
         if pyxel.btnp(pyxel.KEY_K):
@@ -48,7 +54,8 @@ class App:
                 self.scene_setup = False
                 return None
             if not collision_detect(pyxel, self.position,
-                                    self.direction, self.mv_boulders):
+                                    self.direction,
+                                    self.all_boulders[boulder_key]):
                 self.position["x"] += 1
         if pyxel.btnp(pyxel.KEY_LEFT, hold=1, period=1):
             self.direction = "left"
@@ -62,7 +69,8 @@ class App:
                 self.scene_setup = False
                 return None
             if not collision_detect(pyxel, self.position,
-                                    self.direction, self.mv_boulders):
+                                    self.direction,
+                                    self.all_boulders[boulder_key]):
                 self.position["x"] -= 1
         if pyxel.btnp(pyxel.KEY_UP, hold=1, period=1):
             self.direction = "up"
@@ -76,7 +84,8 @@ class App:
                 self.scene_setup = False
                 return None
             if not collision_detect(pyxel, self.position,
-                                    self.direction, self.mv_boulders):
+                                    self.direction,
+                                    self.all_boulders[boulder_key]):
                 self.position["y"] -= 1
         if pyxel.btnp(pyxel.KEY_DOWN, hold=1, period=1):
             self.direction = "down"
@@ -90,11 +99,16 @@ class App:
                 self.scene_setup = False
                 return None
             if not collision_detect(pyxel, self.position,
-                                    self.direction, self.mv_boulders):
+                                    self.direction,
+                                    self.all_boulders[boulder_key]):
                 self.position["y"] += 1
 
     def draw_scene(self):
         pyxel.cls(0)
+        if self.scene_name == "start":
+            boulder_key = "start_map"
+        else:
+            boulder_key = self.scene_name
         if not self.scene_setup:
             self.initialize_scene()
         # Borders around the playable arena
@@ -109,7 +123,7 @@ class App:
             draw.scene_text(pyxel, self.scene_texts[i])
 
         for i in range(0, len(self.mv_boulders)):
-            draw.movable_boulder(pyxel, i, self.mv_boulders)
+            draw.movable_boulder(pyxel, i, self.all_boulders[boulder_key])
 
         for i in range(0, len(self.doors)):
             draw.door(pyxel, self.doors[i])

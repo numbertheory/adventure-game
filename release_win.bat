@@ -15,6 +15,7 @@ pyinstaller --clean --noconfirm --log-level=WARN --onefile --noconsole --name=du
   --add-data=%CURRENTDIR%\util\collision.py;util^
   --add-data=%CURRENTDIR%\util\draw.py;util^
   --add-data=%CURRENTDIR%\util\load_scene.py;util^
+  --add-data=%CURRENTDIR%\util\load_world.py;util^
   --add-data=%CURRENTDIR%\util\movable.py;util^
   game.py
 

@@ -14,6 +14,7 @@ pyinstaller --clean --noconfirm --log-level=WARN --onefile --noconsole --name=du
 --add-data=$PWD/util/collision.py:util \
 --add-data=$PWD/util/draw.py:util \
 --add-data=$PWD/util/load_scene.py:util \
+--add-data=$PWD/util/load_world.py:util \
 --add-data=$PWD/util/movable.py:util \
 game.py
 
