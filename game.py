@@ -1,9 +1,10 @@
 import pyxel
 import sys
-from util.collision import collision_detect, detect_door
+from util.collision import collision_detect, detect_door, get_character_bubble
 import util.draw as draw
 import util.load_scene as scene
 from util.load_world import all_boulders
+from util.movable import detect_movable_boulder
 
 
 class App:
@@ -53,6 +54,18 @@ class App:
                 self.from_door = True
                 self.scene_setup = False
                 return None
+            if pyxel.btnp(pyxel.KEY_LEFT_SHIFT, hold=1, period=1):
+                character_bubble = get_character_bubble(pyxel, self.position)
+                if (
+                    13 in character_bubble[3] and
+                    9 not in character_bubble[3] and
+                    character_bubble[3] != [13, 13, 13, 13, 13, 13, 13]
+                ):
+                    detect_movable_boulder(
+                        pyxel, character_bubble[3],
+                        self.direction,
+                        self.position,
+                        self.all_boulders[boulder_key])
             if not collision_detect(pyxel, self.position,
                                     self.direction,
                                     self.all_boulders[boulder_key]):
@@ -68,6 +81,18 @@ class App:
                 self.from_door = True
                 self.scene_setup = False
                 return None
+            if pyxel.btnp(pyxel.KEY_LEFT_SHIFT, hold=1, period=1):
+                character_bubble = get_character_bubble(pyxel, self.position)
+                if (
+                    13 in character_bubble[2] and
+                    9 not in character_bubble[2] and
+                    character_bubble[2] != [13, 13, 13, 13, 13, 13, 13]
+                ):
+                    detect_movable_boulder(
+                        pyxel, character_bubble[2],
+                        self.direction,
+                        self.position,
+                        self.all_boulders[boulder_key])
             if not collision_detect(pyxel, self.position,
                                     self.direction,
                                     self.all_boulders[boulder_key]):
@@ -83,6 +108,18 @@ class App:
                 self.from_door = True
                 self.scene_setup = False
                 return None
+            if pyxel.btnp(pyxel.KEY_LEFT_SHIFT, hold=1, period=1):
+                character_bubble = get_character_bubble(pyxel, self.position)
+                if (
+                    13 in character_bubble[1] and
+                    9 not in character_bubble[1] and
+                    character_bubble[1] != [13, 13, 13, 13, 13, 13]
+                ):
+                    detect_movable_boulder(
+                        pyxel, character_bubble[1],
+                        self.direction,
+                        self.position,
+                        self.all_boulders[boulder_key])
             if not collision_detect(pyxel, self.position,
                                     self.direction,
                                     self.all_boulders[boulder_key]):
@@ -98,6 +135,18 @@ class App:
                 self.from_door = True
                 self.scene_setup = False
                 return None
+            if pyxel.btnp(pyxel.KEY_LEFT_SHIFT, hold=1, period=1):
+                character_bubble = get_character_bubble(pyxel, self.position)
+                if (
+                    13 in character_bubble[0] and
+                    9 not in character_bubble[0] and
+                    character_bubble[0] != [13, 13, 13, 13, 13, 13]
+                ):
+                    detect_movable_boulder(
+                        pyxel, character_bubble[0],
+                        self.direction,
+                        self.position,
+                        self.all_boulders[boulder_key])
             if not collision_detect(pyxel, self.position,
                                     self.direction,
                                     self.all_boulders[boulder_key]):
@@ -122,7 +171,7 @@ class App:
         for i in range(0, len(self.scene_texts)):
             draw.scene_text(pyxel, self.scene_texts[i])
 
-        for i in range(0, len(self.mv_boulders)):
+        for i in range(0, len(self.all_boulders[boulder_key])):
             draw.movable_boulder(pyxel, i, self.all_boulders[boulder_key])
 
         for i in range(0, len(self.doors)):
