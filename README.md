@@ -36,15 +36,13 @@ pip install -r requirements.txt
 
 # Controls
 
-+-----------------+-----------------------------+
+|  Key            | Movement                    |
+| --------------- | --------------------------- |
 | Arrow keys      | Move character (N, S, E, W) |
-+-----------------+-----------------------------+
 | Left Shift Key  | Pull nearby stone           |
-+-----------------+-----------------------------+
 | I               | Toggle inventory            |
-+-----------------+-----------------------------+
 | Escape, or `Q`  | Quit game                   |
-+-----------------+-----------------------------+
+
 
 Note: To pull a stone, hold down the left shift key and move
 with the arrow keys which will drag the stone behind you. Not
