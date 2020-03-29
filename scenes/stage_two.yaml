@@ -3,6 +3,7 @@ texts:
       y: 41
       text: "SECRET CHAMBER"
       color: 4
+ground: "grass"
 mv_boulders:
     - x: 50
       y: 50

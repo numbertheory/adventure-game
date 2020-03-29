@@ -3,6 +3,7 @@ texts:
       y: 41
       text: "Dungeon DOS"
       color: 8
+ground: "tiles"
 mv_boulders:
     - x: 50
       y: 50

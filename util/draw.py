@@ -38,6 +38,31 @@ def door(pyxel, door_info):
               0, door_type, 0, 8, 8)
 
 
+def ground(pyxel, ground):
+    playa = []
+    for i in range(1, 20):
+        playa.append([[i*8, 8], [i*8, 16], [i*8, 24], [i*8, 32],
+                     [i*8, 40], [i*8, 48], [i*8, 56], [i*8, 64],
+                     [i*8, 72], [i*8, 80], [i*8, 88], [i*8, 96],
+                     [i*8, 104]])
+    if ground == "tiles":
+        ground_info = [[32, 8], [40, 8], [32, 16], [40, 16]]
+    elif ground == "grass":
+        ground_info = [[16, 8], [24, 8], [16, 16], [24, 16]]
+    else:
+        ground_info = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+    counter = 0
+    for i in range(0, 18):
+        for tile in playa[i]:
+            set_tile = ground_info[counter]
+            pyxel.blt(tile[0], tile[1],
+                      0, set_tile[0], set_tile[1], 8, 8)
+            if counter == 3:
+                counter = 0
+            else:
+                counter += 1
+
+
 def start_fireball(pyxel, character_position, direction):
     if direction == "left":
         fireball_position_x = character_position["x"] - 8

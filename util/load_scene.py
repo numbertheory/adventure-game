@@ -25,3 +25,7 @@ def scene_texts(scene):
 
 def doors(scene):
     return load_yaml(scene).get('door_info', [])
+
+
+def ground(scene):
+    return load_yaml(scene).get('ground', None)

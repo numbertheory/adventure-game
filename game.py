@@ -36,6 +36,7 @@ class App:
         self.direction = scene.direction(self.scene_name)
         self.mv_boulders = scene.mv_boulders(self.scene_name)
         self.scene_texts = scene.scene_texts(self.scene_name)
+        self.ground = scene.ground(self.scene_name)
         self.doors = scene.doors(self.scene_name)
         self.from_door = False
         self.scene_setup = True
@@ -207,6 +208,11 @@ class App:
             for i in range(1, 20):
                 draw.stone_obstacle(pyxel, i*8, 0)
                 draw.stone_obstacle(pyxel, i*8, 112)
+
+            # Draw the ground tiles
+
+            draw.ground(pyxel, self.ground)
+
             # Draw scene from YAML
             for i in range(0, len(self.scene_texts)):
                 draw.scene_text(pyxel, self.scene_texts[i])
