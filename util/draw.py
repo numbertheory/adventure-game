@@ -36,3 +36,48 @@ def door(pyxel, door_info):
     pyxel.blt(door_info["x"],
               door_info["y"],
               0, door_type, 0, 8, 8)
+
+
+def start_fireball(pyxel, character_position, direction):
+    if direction == "left":
+        fireball_position_x = character_position["x"] - 8
+        fireball_position_y = character_position["y"]
+    if direction == "right":
+        fireball_position_x = character_position["x"] + 8
+        fireball_position_y = character_position["y"]
+    if direction == "up":
+        fireball_position_x = character_position["x"]
+        fireball_position_y = character_position["y"] - 8
+    if direction == "down":
+        fireball_position_x = character_position["x"]
+        fireball_position_y = character_position["y"] + 8
+    pyxel.blt(fireball_position_x, fireball_position_y,
+              0, 0, 8, 8, 8, colkey=0)
+    return [fireball_position_x,
+            fireball_position_y]
+
+
+def fireball(pyxel, fireball_coords):
+    if fireball_coords["animate"] == 0:
+        fireball_frame = [0, 8]
+        next_frame = 1
+    else:
+        fireball_frame = [8, 8]
+        next_frame = 0
+    if fireball_coords["direction"] == "left":
+        fireball_position_x = fireball_coords["x"] - 1
+        fireball_position_y = fireball_coords["y"]
+    if fireball_coords["direction"] == "right":
+        fireball_position_x = fireball_coords["x"] + 1
+        fireball_position_y = fireball_coords["y"]
+    if fireball_coords["direction"] == "up":
+        fireball_position_x = fireball_coords["x"]
+        fireball_position_y = fireball_coords["y"] - 1
+    if fireball_coords["direction"] == "down":
+        fireball_position_x = fireball_coords["x"]
+        fireball_position_y = fireball_coords["y"] + 1
+    pyxel.blt(fireball_position_x,
+              fireball_position_y,
+              0, fireball_frame[0], fireball_frame[1], 8, 8, colkey=0)
+    return [fireball_position_x,
+            fireball_position_y, next_frame]

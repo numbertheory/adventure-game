@@ -1,6 +1,7 @@
 import pyxel
 import sys
 from util.collision import collision_detect, detect_door, get_character_bubble
+from util.collision import get_tile_bubble
 import util.draw as draw
 import util.load_scene as scene
 from util.load_world import all_boulders
@@ -19,6 +20,9 @@ class App:
         self.inventory_up = False
         self.main_play = True
         self.fireballs = 10
+        self.fireball_in_flight = False
+        self.fireball_coords = {
+            "x": 0, "y": 0, "range": 0, "direction": None, "animate": 0}
         self.coins = 5
         pyxel.run(self.update, self.draw_scene)
 
@@ -45,9 +49,18 @@ class App:
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
         if pyxel.btnp(pyxel.KEY_F):
-            if self.main_play:
+            if self.main_play and not self.fireball_in_flight:
                 if self.fireballs >= 1:
                     self.fireballs -= 1
+                    fire_coords = draw.start_fireball(
+                                    pyxel, self.position, self.direction)
+                    self.fireball_coords = {
+                        "x": fire_coords[0],
+                        "y": fire_coords[1],
+                        "range": 100,
+                        "direction": self.direction,
+                        "animate": 0}
+                    self.fireball_in_flight = True
 
         if pyxel.btnp(pyxel.KEY_I):
             if not self.inventory_up:
@@ -205,6 +218,35 @@ class App:
                 draw.door(pyxel, self.doors[i])
 
             draw.main_character(pyxel, self.position, self.direction)
+
+            if self.fireball_in_flight:
+                fireball_coords = draw.fireball(pyxel, self.fireball_coords)
+                bubble = get_tile_bubble(pyxel, self.fireball_coords)
+                fireball_collide = False
+                if self.fireball_coords["direction"] == "left":
+                    if 13 in bubble[3]:
+                        fireball_collide = True
+                if self.fireball_coords["direction"] == "right":
+                    if 13 in bubble[2]:
+                        fireball_collide = True
+                if self.fireball_coords["direction"] == "up":
+                    if 13 in bubble[0]:
+                        fireball_collide = True
+                if self.fireball_coords["direction"] == "down":
+                    if 13 in bubble[1]:
+                        fireball_collide = True
+
+                if not fireball_collide:
+                    self.fireball_coords["x"] = fireball_coords[0]
+                    self.fireball_coords["y"] = fireball_coords[1]
+                    self.fireball_coords["range"] -= 1
+                    self.fireball_coords["animate"] = fireball_coords[2]
+                    if self.fireball_coords["range"] <= 0:
+                        self.fireball_in_flight = False
+                        self.fireball_range = 10
+                else:
+                    self.fireball_in_flight = False
+                    self.fireball_range = 10
 
         if self.inventory_up:
             pyxel.cls(0)

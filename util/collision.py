@@ -121,3 +121,25 @@ def collision_detect(pyxel, position, direction, mv_boulders):
                     return True
         else:
             return False
+
+
+def get_tile_bubble(pyxel, position):
+    north = []
+    south = []
+    east = []
+    west = []
+    for i in range(0, 8):
+        north.append(
+            pyxel.pget(position["x"] + i, position["y"] - 2)
+            )
+        south.append(
+            pyxel.pget(position["x"] + i, position["y"] + 9)
+        )
+    for i in range(0, 8):
+        east.append(
+            pyxel.pget(position["x"] + 2, position["y"] + i)
+        )
+        west.append(
+            pyxel.pget(position["x"] - 9, position["y"] + i)
+        )
+    return [north, south, east, west]
