@@ -1,4 +1,5 @@
 
+
 def stone_obstacle(pyxel, x, y):
     pyxel.blt(x, y, 0, 40, 0, 8, 8)
 
@@ -36,6 +37,17 @@ def door(pyxel, door_info):
     pyxel.blt(door_info["x"],
               door_info["y"],
               0, door_type, 0, 8, 8)
+
+
+def fire(pyxel, frame):
+    fires = [[0, 16], [8, 16], [0, 24], [8, 24]]
+    pyxel.blt(20, 0,
+              0, fires[frame][0], fires[frame][1], 8, 8)
+
+
+def goblet(pyxel, x, y):
+    pyxel.blt(x, y,
+              0, 48, 8, 8, 8)
 
 
 def ground(pyxel, ground):

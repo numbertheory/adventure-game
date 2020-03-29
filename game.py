@@ -1,5 +1,6 @@
 import pyxel
 import sys
+import random
 from util.collision import collision_detect, detect_door, get_character_bubble
 from util.collision import get_tile_bubble
 import util.draw as draw
@@ -24,6 +25,7 @@ class App:
         self.fireball_coords = {
             "x": 0, "y": 0, "range": 0, "direction": None, "animate": 0}
         self.coins = 5
+        self.health = 10
         pyxel.run(self.update, self.draw_scene)
 
     def log_handler(self, text):
@@ -82,6 +84,7 @@ class App:
                                      "y": self.doors[door_info]["gate"]["y"]}
                     self.from_door = True
                     self.scene_setup = False
+                    self.fireball_in_flight = False
                     return None
                 if pyxel.btnp(pyxel.KEY_LEFT_SHIFT, hold=1, period=1):
                     character_bubble = get_character_bubble(
@@ -112,6 +115,7 @@ class App:
                                      "y": self.doors[door_info]["gate"]["y"]}
                     self.from_door = True
                     self.scene_setup = False
+                    self.fireball_in_flight = False
                     return None
                 if pyxel.btnp(pyxel.KEY_LEFT_SHIFT, hold=1, period=1):
                     character_bubble = get_character_bubble(
@@ -142,6 +146,7 @@ class App:
                                      "y": self.doors[door_info]["gate"]["y"]}
                     self.from_door = True
                     self.scene_setup = False
+                    self.fireball_in_flight = False
                     return None
                 if pyxel.btnp(pyxel.KEY_LEFT_SHIFT, hold=1, period=1):
                     character_bubble = get_character_bubble(
@@ -173,6 +178,7 @@ class App:
                                      "y": self.doors[door_info]["gate"]["y"]}
                     self.from_door = True
                     self.scene_setup = False
+                    self.fireball_in_flight = False
                     return None
                 if pyxel.btnp(pyxel.KEY_LEFT_SHIFT, hold=1, period=1):
                     character_bubble = get_character_bubble(
@@ -212,6 +218,20 @@ class App:
             # Draw the ground tiles
 
             draw.ground(pyxel, self.ground)
+
+            # Draw fireball counter symbol
+            self.fire_frame = 0
+            if random.choice(range(0, 4)) == 0:
+                self.fire_frame += 1
+            if self.fire_frame == 4:
+                self.fire_frame = 0
+
+            draw.fire(pyxel, self.fire_frame)
+            pyxel.text(29, 2, str(self.fireballs), 8)
+
+            # Draw life meter
+            draw.goblet(pyxel, 0, 0)
+            pyxel.text(8, 2, str(self.health), 8)
 
             # Draw scene from YAML
             for i in range(0, len(self.scene_texts)):

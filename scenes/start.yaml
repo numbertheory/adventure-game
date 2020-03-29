@@ -27,7 +27,7 @@ mv_boulders:
       y: 20
 door_info:
     - x: 64
-      y: 0
+      y: 8
       door_type: "north"
       gate:
         scene_name: "stage_two"
