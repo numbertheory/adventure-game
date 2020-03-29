@@ -128,18 +128,18 @@ def get_tile_bubble(pyxel, position):
     south = []
     east = []
     west = []
-    for i in range(0, 8):
+    for i in range(1, 9):
         north.append(
-            pyxel.pget(position["x"] + i, position["y"] - 2)
+            pyxel.pget(position["x"] + i, position["y"] - 1)
             )
         south.append(
-            pyxel.pget(position["x"] + i, position["y"] + 9)
+            pyxel.pget(position["x"] + i, position["y"] + 8)
         )
-    for i in range(0, 8):
+    for i in range(1, 9):
         east.append(
-            pyxel.pget(position["x"] + 2, position["y"] + i)
+            pyxel.pget(position["x"] + 9, position["y"] + i)
         )
         west.append(
-            pyxel.pget(position["x"] - 9, position["y"] + i)
+            pyxel.pget(position["x"] - 1, position["y"] + i)
         )
     return [north, south, east, west]
