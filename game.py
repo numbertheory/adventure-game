@@ -202,11 +202,11 @@ class App:
             if not self.scene_setup:
                 self.initialize_scene()
             # Borders around the playable arena
-            for i in range(0, 15):
+            for i in range(1, 15):
                 draw.stone_obstacle(pyxel, 0, i*8)
                 draw.stone_obstacle(pyxel, 152, i*8)
             for i in range(1, 20):
-                draw.stone_obstacle(pyxel, i*8, 0)
+                draw.stone_obstacle(pyxel, i*8, 8)
                 draw.stone_obstacle(pyxel, i*8, 112)
 
             # Draw the ground tiles

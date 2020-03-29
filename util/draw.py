@@ -55,8 +55,9 @@ def ground(pyxel, ground):
     for i in range(0, 18):
         for tile in playa[i]:
             set_tile = ground_info[counter]
-            pyxel.blt(tile[0], tile[1],
-                      0, set_tile[0], set_tile[1], 8, 8)
+            if tile[1] + 8 != 112:
+                pyxel.blt(tile[0], tile[1] + 8,
+                          0, set_tile[0], set_tile[1], 8, 8)
             if counter == 3:
                 counter = 0
             else:
