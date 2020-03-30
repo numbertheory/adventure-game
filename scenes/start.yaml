@@ -8,6 +8,13 @@ texts:
       text: "Dungeon DOS"
       color: 8
 ground: "tiles"
+monsters:
+    - x: 70
+      y: 50
+      monster_type: "zeep"
+    - x: 78
+      y: 50
+      monster_type: "zeep"
 mv_boulders:
     - x: 50
       y: 50

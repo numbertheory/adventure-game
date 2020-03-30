@@ -50,6 +50,12 @@ def goblet(pyxel, x, y):
               0, 48, 8, 8, 8)
 
 
+def monster(pyxel, monster_info):
+    pyxel.blt(monster_info["x"],
+              monster_info["y"],
+              0, 0, 32, 8, 8)
+
+
 def ground(pyxel, ground):
     playa = []
     for i in range(1, 20):

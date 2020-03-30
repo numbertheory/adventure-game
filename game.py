@@ -5,7 +5,7 @@ from util.collision import collision_detect, detect_door, get_character_bubble
 from util.collision import get_tile_bubble
 import util.draw as draw
 import util.load_scene as scene
-from util.load_world import all_boulders
+from util.load_world import all_boulders, all_monsters
 from util.movable import detect_movable_boulder
 
 
@@ -26,6 +26,7 @@ class App:
             "x": 0, "y": 0, "range": 0, "direction": None, "animate": 0}
         self.coins = 5
         self.health = 10
+        self.monsters = all_monsters()
         pyxel.run(self.update, self.draw_scene)
 
     def log_handler(self, text):
@@ -203,8 +204,10 @@ class App:
             pyxel.cls(0)
             if self.scene_name == "start":
                 boulder_key = "start_map"
+                monster_key = "start_map"
             else:
                 boulder_key = self.scene_name
+                monster_key = self.scene_name
             if not self.scene_setup:
                 self.initialize_scene()
             # Borders around the playable arena
@@ -242,6 +245,9 @@ class App:
 
             for i in range(0, len(self.doors)):
                 draw.door(pyxel, self.doors[i])
+
+            for i in range(0, len(self.monsters[monster_key])):
+                draw.monster(pyxel, self.monsters[monster_key][i])
 
             draw.main_character(pyxel, self.position, self.direction)
 
