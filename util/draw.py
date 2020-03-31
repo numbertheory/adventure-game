@@ -53,7 +53,7 @@ def goblet(pyxel, x, y):
 def monster(pyxel, monster_info):
     pyxel.blt(monster_info["x"],
               monster_info["y"],
-              0, 0, 32, 8, 8)
+              0, 0, 32, 8, 8, colkey=0)
 
 
 def ground(pyxel, ground):

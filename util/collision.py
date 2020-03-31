@@ -64,6 +64,14 @@ def get_character_bubble(pyxel, position):
     return [north, south, east, west]
 
 
+def get_character_pixels(pyxel, position):
+    character_points = []
+    for i in range(0, 6):
+        for j in range(0, 7):
+            character_points.append([position["x"] + i, position["y"] + j])
+    return character_points
+
+
 def collision_detect(pyxel, position, direction, mv_boulders):
     # Detect collisions with borders and walls
     border_color = 13
@@ -138,6 +146,28 @@ def get_tile_bubble(pyxel, position):
     for i in range(1, 9):
         east.append(
             pyxel.pget(position["x"] + 9, position["y"] + i)
+        )
+        west.append(
+            pyxel.pget(position["x"] - 1, position["y"] + i)
+        )
+    return [north, south, east, west]
+
+
+def get_fireball_bubble(pyxel, position):
+    north = []
+    south = []
+    east = []
+    west = []
+    for i in range(1, 9):
+        north.append(
+            pyxel.pget(position["x"] + i, position["y"] - 1)
+            )
+        south.append(
+            pyxel.pget(position["x"] + i, position["y"] + 8)
+        )
+    for i in range(1, 9):
+        east.append(
+            pyxel.pget(position["x"] + 8, position["y"] + i)
         )
         west.append(
             pyxel.pget(position["x"] - 1, position["y"] + i)

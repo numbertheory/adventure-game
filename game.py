@@ -1,12 +1,13 @@
 import pyxel
 import sys
 import random
-from util.collision import collision_detect, detect_door, get_character_bubble
-from util.collision import get_tile_bubble
+from util.collision import collision_detect, detect_door
+from util.collision import get_character_bubble, get_character_pixels
+from util.collision import get_tile_bubble, get_fireball_bubble
 import util.draw as draw
 import util.load_scene as scene
 from util.load_world import all_boulders, all_monsters
-from util.movable import detect_movable_boulder
+from util.movable import detect_movable_boulder, closest_point
 
 
 class App:
@@ -27,6 +28,7 @@ class App:
         self.coins = 5
         self.health = 10
         self.monsters = all_monsters()
+        self.death = False
         pyxel.run(self.update, self.draw_scene)
 
     def log_handler(self, text):
@@ -200,7 +202,22 @@ class App:
                     self.position["y"] += 1
 
     def draw_scene(self):
-        if self.main_play:
+        if self.health < 0:
+            self.death = True
+        if self.death:
+            pyxel.cls(0)
+            for i in range(1, 15):
+                draw.stone_obstacle(pyxel, 0, i*8)
+                draw.stone_obstacle(pyxel, 152, i*8)
+            for i in range(1, 20):
+                draw.stone_obstacle(pyxel, i*8, 8)
+                draw.stone_obstacle(pyxel, i*8, 112)
+            pyxel.text(55,
+                       41,
+                       "YOU DIED",
+                       10)
+
+        if self.main_play and not self.death:
             pyxel.cls(0)
             if self.scene_name == "start":
                 boulder_key = "start_map"
@@ -236,6 +253,40 @@ class App:
             draw.goblet(pyxel, 0, 0)
             pyxel.text(8, 2, str(self.health), 8)
 
+            # move monsters
+            for i in range(0, len(self.monsters[monster_key])):
+                character_pixels = get_character_pixels(pyxel, self.position)
+                monster_bubble = get_tile_bubble(
+                    pyxel, self.monsters[monster_key][i])
+                if (random.choice(range(0, 6)) == 0 and
+                   (13 not in monster_bubble[1])):
+                    self.monsters[monster_key][i]["y"] += 1
+                    monster_position = [self.monsters[monster_key][i]["x"],
+                                        self.monsters[monster_key][i]["y"]]
+                    if monster_position in character_pixels:
+                        self.health -= 1
+                if (random.choice(range(0, 6)) == 0 and
+                   (13 not in monster_bubble[2])):
+                    self.monsters[monster_key][i]["x"] += 1
+                    monster_position = [self.monsters[monster_key][i]["x"],
+                                        self.monsters[monster_key][i]["y"]]
+                    if monster_position in character_pixels:
+                        self.health -= 1
+                if (random.choice(range(0, 6)) == 0 and
+                   (13 not in monster_bubble[0])):
+                    self.monsters[monster_key][i]["y"] -= 1
+                    monster_position = [self.monsters[monster_key][i]["x"],
+                                        self.monsters[monster_key][i]["y"]]
+                    if monster_position in character_pixels:
+                        self.health -= 1
+                if (random.choice(range(0, 6)) == 0 and
+                   (13 not in monster_bubble[3])):
+                    self.monsters[monster_key][i]["x"] -= 1
+                    monster_position = [self.monsters[monster_key][i]["x"],
+                                        self.monsters[monster_key][i]["y"]]
+                    if monster_position in character_pixels:
+                        self.health -= 1
+
             # Draw scene from YAML
             for i in range(0, len(self.scene_texts)):
                 draw.scene_text(pyxel, self.scene_texts[i])
@@ -247,26 +298,37 @@ class App:
                 draw.door(pyxel, self.doors[i])
 
             for i in range(0, len(self.monsters[monster_key])):
-                draw.monster(pyxel, self.monsters[monster_key][i])
+                if not self.monsters[monster_key][i]["dead"]:
+                    draw.monster(pyxel, self.monsters[monster_key][i])
 
             draw.main_character(pyxel, self.position, self.direction)
 
-            if self.fireball_in_flight:
+            if self.fireball_in_flight and not self.death:
                 fireball_coords = draw.fireball(pyxel, self.fireball_coords)
                 bubble = get_tile_bubble(pyxel, self.fireball_coords)
+                fire_bubble = get_fireball_bubble(pyxel, self.fireball_coords)
                 fireball_collide = False
+                enemy_hit = False
                 if self.fireball_coords["direction"] == "left":
                     if 13 in bubble[3]:
                         fireball_collide = True
+                    if 8 in fire_bubble[3]:
+                        enemy_hit = True
                 if self.fireball_coords["direction"] == "right":
                     if 13 in bubble[2]:
                         fireball_collide = True
+                    if 8 in fire_bubble[2]:
+                        enemy_hit = True
                 if self.fireball_coords["direction"] == "up":
                     if 13 in bubble[0]:
                         fireball_collide = True
+                    if 8 in fire_bubble[0]:
+                        enemy_hit = True
                 if self.fireball_coords["direction"] == "down":
                     if 13 in bubble[1]:
                         fireball_collide = True
+                    if 8 in fire_bubble[1]:
+                        enemy_hit = True
 
                 if not fireball_collide:
                     self.fireball_coords["x"] = fireball_coords[0]
@@ -280,7 +342,18 @@ class App:
                     self.fireball_in_flight = False
                     self.fireball_range = 10
 
-        if self.inventory_up:
+                monster_coords = [(x["x"], x["y"])
+                                  for x in self.monsters[monster_key]]
+                fb_coords = (self.fireball_coords["x"],
+                             self.fireball_coords["y"])
+                if enemy_hit:
+                    monster_id = closest_point(fb_coords,
+                                               monster_coords)
+                    self.monsters[monster_key][monster_id]["dead"] = True
+                    self.fireball_in_flight = False
+                    self.fireball_range = 10
+
+        if self.inventory_up and not self.death:
             pyxel.cls(0)
             for i in range(0, 15):
                 draw.stone_obstacle(pyxel, 0, i*8)
