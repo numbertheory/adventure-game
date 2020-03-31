@@ -1,0 +1,9 @@
+door_info:
+    - x: 0
+      y: 64
+      door_type: "west"
+      gate:
+        scene_name: "b1"
+        x: 140
+        y: 40
+ground: "grass"

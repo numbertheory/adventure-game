@@ -8,28 +8,49 @@ def load_yaml(scene):
 
 
 def position(scene):
-    return load_yaml(scene).get('position', {"x": 50, "y": 50})
+    try:
+        return load_yaml(scene).get('position', {"x": 50, "y": 50})
+    except AttributeError:
+        return {"x": 50, "y": 50}
 
 
 def direction(scene):
-    return load_yaml(scene).get('direction', "left")
+    try:
+        return load_yaml(scene).get('direction', "left")
+    except AttributeError:
+        return "left"
 
 
 def mv_boulders(scene):
-    return load_yaml(scene).get('mv_boulders', [])
+    try:
+        return load_yaml(scene).get('mv_boulders', [])
+    except AttributeError:
+        return []
 
 
 def walls(scene):
-    return load_yaml(scene).get('walls', [])
+    try:
+        return load_yaml(scene).get('walls', [])
+    except AttributeError:
+        return []
 
 
 def scene_texts(scene):
-    return load_yaml(scene).get('texts', [])
+    try:
+        return load_yaml(scene).get('texts', [])
+    except AttributeError:
+        return []
 
 
 def doors(scene):
-    return load_yaml(scene).get('door_info', [])
+    try:
+        return load_yaml(scene).get('door_info', [])
+    except AttributeError:
+        return []
 
 
 def ground(scene):
-    return load_yaml(scene).get('ground', None)
+    try:
+        return load_yaml(scene).get('ground', None)
+    except AttributeError:
+        return None
