@@ -24,7 +24,7 @@ def detect_movable_boulder(pyxel, color_bar, direction,
                 collision_detect.append(
                     pyxel.pget(mv_boulders[boulder_id]["x"] + i,
                                mv_boulders[boulder_id]["y"] - 1))
-            if 13 in collision_detect:
+            if (13 in collision_detect or 2 in collision_detect):
                 return True
             else:
                 mv_boulders[boulder_id] = {
@@ -43,7 +43,7 @@ def detect_movable_boulder(pyxel, color_bar, direction,
                 collision_detect.append(
                     pyxel.pget(mv_boulders[boulder_id]["x"] + i,
                                mv_boulders[boulder_id]["y"] + 8))
-            if 13 in collision_detect:
+            if (13 in collision_detect or 2 in collision_detect):
                 return True
             mv_boulders[boulder_id] = {
                 "x": mv_boulders[boulder_id]["x"],
@@ -61,7 +61,7 @@ def detect_movable_boulder(pyxel, color_bar, direction,
                 collision_detect.append(
                     pyxel.pget(mv_boulders[boulder_id]["x"] - 1,
                                mv_boulders[boulder_id]["y"] + i))
-            if 13 in collision_detect:
+            if (13 in collision_detect or 2 in collision_detect):
                 return True
             mv_boulders[boulder_id] = {
                 "x": mv_boulders[boulder_id]["x"] - 1,
@@ -79,7 +79,7 @@ def detect_movable_boulder(pyxel, color_bar, direction,
                 collision_detect.append(
                     pyxel.pget(mv_boulders[boulder_id]["x"] + 8,
                                mv_boulders[boulder_id]["y"] + i))
-            if 13 in collision_detect:
+            if (13 in collision_detect or 2 in collision_detect):
                 return True
             mv_boulders[boulder_id] = {
                 "x": mv_boulders[boulder_id]["x"] + 1,

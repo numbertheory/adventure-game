@@ -78,6 +78,8 @@ def collision_detect(pyxel, position, direction, mv_boulders):
     north, south, east, west = get_character_bubble(pyxel, position)
 
     if direction == "left":
+        if 2 in west:
+            return True
         if border_color in west:
             boulder_exists = detect_movable_boulder(
                                 pyxel, west, direction,
@@ -86,11 +88,13 @@ def collision_detect(pyxel, position, direction, mv_boulders):
                 return True
             else:
                 bubble = get_character_bubble(pyxel, position)[3]
-                if 13 in bubble:
+                if (13 in bubble or 2 in bubble):
                     return True
         else:
             return False
     if direction == "right":
+        if 2 in east:
+            return True
         if border_color in east:
             boulder_exists = detect_movable_boulder(
                                 pyxel, east, direction,
@@ -99,11 +103,13 @@ def collision_detect(pyxel, position, direction, mv_boulders):
                 return True
             else:
                 bubble = get_character_bubble(pyxel, position)[2]
-                if 13 in bubble:
+                if (13 in bubble or 2 in bubble):
                     return True
         else:
             return False
     if direction == "up":
+        if 2 in north:
+            return True
         if border_color in north:
             boulder_exists = detect_movable_boulder(
                                     pyxel, north, direction,
@@ -112,11 +118,13 @@ def collision_detect(pyxel, position, direction, mv_boulders):
                 return True
             else:
                 bubble = get_character_bubble(pyxel, position)[0]
-                if 13 in bubble:
+                if (13 in bubble or 2 in bubble):
                     return True
         else:
             return False
     if direction == "down":
+        if 2 in south:
+            return True
         if border_color in south:
             boulder_exists = detect_movable_boulder(
                                 pyxel, south, direction,
@@ -125,7 +133,7 @@ def collision_detect(pyxel, position, direction, mv_boulders):
                 return True
             else:
                 bubble = get_character_bubble(pyxel, position)[1]
-                if 13 in bubble:
+                if (13 in bubble or 2 in bubble):
                     return True
         else:
             return False

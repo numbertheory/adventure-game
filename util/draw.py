@@ -11,7 +11,7 @@ def movable_boulder(pyxel, id, mv_boulders):
 
 def wall(pyxel, id, walls):
     pyxel.blt(walls[id]["x"],
-              walls[id]["y"], 0, 40, 0, 8, 8, colkey=0)
+              walls[id]["y"], 0, 56, 8, 8, 8, colkey=0)
 
 
 def main_character(pyxel, position, direction):
