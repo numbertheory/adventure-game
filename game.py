@@ -54,6 +54,8 @@ class App:
             boulder_key = self.scene_name
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
+        if pyxel.btnp(pyxel.KEY_R):
+            self.fireballs = 10
         if pyxel.btnp(pyxel.KEY_F):
             if self.main_play and not self.fireball_in_flight:
                 if self.fireballs >= 1:
