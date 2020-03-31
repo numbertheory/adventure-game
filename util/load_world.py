@@ -14,9 +14,12 @@ def get_all_from_key(top_level_key):
     all_scenes = dict()
     for scene in scenes:
         formatted_scene = os.path.basename(scene).replace('.yaml', '')
-        if formatted_scene != "start":
-            all_scenes[formatted_scene] = load_yaml(
-                scene).get(top_level_key, [])
+        if formatted_scene != "a1":
+            try:
+                all_scenes[formatted_scene] = load_yaml(
+                    scene).get(top_level_key, [])
+            except AttributeError:
+                all_scenes[formatted_scene] = {"default": ""}
     return all_scenes
 
 

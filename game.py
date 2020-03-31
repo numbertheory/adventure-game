@@ -15,7 +15,7 @@ class App:
         pyxel.init(160, 120, caption="Dungeon DOS")
         pyxel.load("assets/image_map.pyxres")
         self.all_boulders = all_boulders()
-        self.scene_name = "start"
+        self.scene_name = "a1"
         self.scene_setup = False
         self.from_door = False
         self.initialize_scene()
@@ -49,8 +49,8 @@ class App:
 
     def update(self):
         # These controls do not work outside of this main App class.
-        if self.scene_name == "start":
-            boulder_key = "start_map"
+        if self.scene_name == "a1":
+            boulder_key = "a1_duplicate"
         else:
             boulder_key = self.scene_name
         if pyxel.btnp(pyxel.KEY_Q):
@@ -222,9 +222,9 @@ class App:
 
         if self.main_play and not self.death:
             pyxel.cls(0)
-            if self.scene_name == "start":
-                boulder_key = "start_map"
-                monster_key = "start_map"
+            if self.scene_name == "a1":
+                boulder_key = "a1_duplicate"
+                monster_key = "a1_duplicate"
             else:
                 boulder_key = self.scene_name
                 monster_key = self.scene_name

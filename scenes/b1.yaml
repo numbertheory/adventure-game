@@ -8,6 +8,6 @@ door_info:
       y: 64
       door_type: "west"
       gate:
-        scene_name: "start_map"
+        scene_name: "a1_duplicate"
         x: 145
         y: 40

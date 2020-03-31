@@ -39,13 +39,13 @@ door_info:
       y: 8
       door_type: "north"
       gate:
-        scene_name: "stage_two"
+        scene_name: "a2"
         x: 64
         y: 100
     - x: 152
       y: 40
       door_type: "east"
       gate:
-        scene_name: "stage_three"
+        scene_name: "b1"
         x: 10
         y: 65

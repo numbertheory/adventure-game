@@ -1,3 +1,4 @@
+direction: "left"
 texts:
     - x: 55
       y: 41
@@ -21,7 +22,7 @@ mv_boulders:
     - x: 50
       y: 90
     - x: 60
-      y: 30
+      y: 10
     - x: 100
       y: 90
     - x: 120
@@ -35,13 +36,13 @@ door_info:
       y: 8
       door_type: "north"
       gate:
-        scene_name: "stage_two"
+        scene_name: "a2"
         x: 64
         y: 100
     - x: 152
       y: 40
       door_type: "east"
       gate:
-        scene_name: "stage_three"
+        scene_name: "b1"
         x: 10
         y: 65

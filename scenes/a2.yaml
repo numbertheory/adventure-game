@@ -12,7 +12,7 @@ door_info:
       y: 112
       door_type: "south"
       gate:
-        scene_name: "start_map"
+        scene_name: "a1_duplicate"
         x: 64
         y: 10
 walls:
