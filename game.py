@@ -258,37 +258,39 @@ class App:
 
             # move monsters
             for i in range(0, len(self.monsters[monster_key])):
-                character_pixels = get_character_pixels(pyxel, self.position)
-                monster_bubble = get_tile_bubble(
-                    pyxel, self.monsters[monster_key][i])
-                if (random.choice(range(0, 6)) == 0 and
-                   (13 not in monster_bubble[1])):
-                    self.monsters[monster_key][i]["y"] += 1
-                    monster_position = [self.monsters[monster_key][i]["x"],
-                                        self.monsters[monster_key][i]["y"]]
-                    if monster_position in character_pixels:
-                        self.health -= 1
-                if (random.choice(range(0, 6)) == 0 and
-                   (13 not in monster_bubble[2])):
-                    self.monsters[monster_key][i]["x"] += 1
-                    monster_position = [self.monsters[monster_key][i]["x"],
-                                        self.monsters[monster_key][i]["y"]]
-                    if monster_position in character_pixels:
-                        self.health -= 1
-                if (random.choice(range(0, 6)) == 0 and
-                   (13 not in monster_bubble[0])):
-                    self.monsters[monster_key][i]["y"] -= 1
-                    monster_position = [self.monsters[monster_key][i]["x"],
-                                        self.monsters[monster_key][i]["y"]]
-                    if monster_position in character_pixels:
-                        self.health -= 1
-                if (random.choice(range(0, 6)) == 0 and
-                   (13 not in monster_bubble[3])):
-                    self.monsters[monster_key][i]["x"] -= 1
-                    monster_position = [self.monsters[monster_key][i]["x"],
-                                        self.monsters[monster_key][i]["y"]]
-                    if monster_position in character_pixels:
-                        self.health -= 1
+                if not self.monsters[monster_key]["dead"]:
+                    character_pixels = get_character_pixels(
+                        pyxel, self.position)
+                    monster_bubble = get_tile_bubble(
+                        pyxel, self.monsters[monster_key][i])
+                    if (random.choice(range(0, 6)) == 0 and
+                       (13 not in monster_bubble[1])):
+                        self.monsters[monster_key][i]["y"] += 1
+                        monster_position = [self.monsters[monster_key][i]["x"],
+                                            self.monsters[monster_key][i]["y"]]
+                        if monster_position in character_pixels:
+                            self.health -= 1
+                    if (random.choice(range(0, 6)) == 0 and
+                       (13 not in monster_bubble[2])):
+                        self.monsters[monster_key][i]["x"] += 1
+                        monster_position = [self.monsters[monster_key][i]["x"],
+                                            self.monsters[monster_key][i]["y"]]
+                        if monster_position in character_pixels:
+                            self.health -= 1
+                    if (random.choice(range(0, 6)) == 0 and
+                       (13 not in monster_bubble[0])):
+                        self.monsters[monster_key][i]["y"] -= 1
+                        monster_position = [self.monsters[monster_key][i]["x"],
+                                            self.monsters[monster_key][i]["y"]]
+                        if monster_position in character_pixels:
+                            self.health -= 1
+                    if (random.choice(range(0, 6)) == 0 and
+                       (13 not in monster_bubble[3])):
+                        self.monsters[monster_key][i]["x"] -= 1
+                        monster_position = [self.monsters[monster_key][i]["x"],
+                                            self.monsters[monster_key][i]["y"]]
+                        if monster_position in character_pixels:
+                            self.health -= 1
 
             # Draw scene from YAML
             for i in range(0, len(self.scene_texts)):
