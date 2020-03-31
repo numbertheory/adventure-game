@@ -41,14 +41,24 @@ pip install -r requirements.txt
 | Arrows          | Move character (`N`, `S`, `E`, `W`) |
 | Left `SHIFT`    | Pull nearby stone                   |
 | `I`             | Toggle inventory                    |
+| `R`             | Reloads fireballs*                  |
 | `ESC`, or `Q`   | Quit game                           |
 
+\*Temporarily made the character have "infinite" fireballs, so
+that we don't have to implement picking up resources just yet.
+Will be removed once that is complete.
 
 Note: To pull a stone, hold down the left shift key and move
 with the arrow keys which will drag the stone behind you. Not
 all surfaces of the stone will accept the pull. This is an
 accident of how the feature was implemented, but I like the mechanic
 as pulling a huge boulder takes a bit more effort than pushing one.
+
+# Monsters
+
+Monsters are the characters with a magenta border moving by themselves
+on the screen. If you touch them, your health starts to drain. If you launch a
+fireball at them (press `F` key to fire) and the fireball hits them, they die.
 
 
 # License
