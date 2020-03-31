@@ -19,6 +19,10 @@ def mv_boulders(scene):
     return load_yaml(scene).get('mv_boulders', [])
 
 
+def walls(scene):
+    return load_yaml(scene).get('walls', [])
+
+
 def scene_texts(scene):
     return load_yaml(scene).get('texts', [])
 

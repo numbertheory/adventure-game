@@ -43,6 +43,7 @@ class App:
         self.scene_texts = scene.scene_texts(self.scene_name)
         self.ground = scene.ground(self.scene_name)
         self.doors = scene.doors(self.scene_name)
+        self.walls = scene.walls(self.scene_name)
         self.from_door = False
         self.scene_setup = True
 
@@ -295,6 +296,9 @@ class App:
 
             for i in range(0, len(self.all_boulders[boulder_key])):
                 draw.movable_boulder(pyxel, i, self.all_boulders[boulder_key])
+
+            for i in range(0, len(self.walls)):
+                draw.wall(pyxel, i, self.walls)
 
             for i in range(0, len(self.doors)):
                 draw.door(pyxel, self.doors[i])

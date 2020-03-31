@@ -9,6 +9,11 @@ def movable_boulder(pyxel, id, mv_boulders):
               mv_boulders[id]["y"], 0, 48, 0, 8, 8, colkey=0)
 
 
+def wall(pyxel, id, walls):
+    pyxel.blt(walls[id]["x"],
+              walls[id]["y"], 0, 40, 0, 8, 8, colkey=0)
+
+
 def main_character(pyxel, position, direction):
     sprite = {"left": 9, "right": 17,
               "up": 33, "down": 25}
