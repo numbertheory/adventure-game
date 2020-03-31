@@ -258,7 +258,7 @@ class App:
 
             # move monsters
             for i in range(0, len(self.monsters[monster_key])):
-                if not self.monsters[monster_key]["dead"]:
+                if not self.monsters[monster_key][i]["dead"]:
                     character_pixels = get_character_pixels(
                         pyxel, self.position)
                     monster_bubble = get_tile_bubble(
