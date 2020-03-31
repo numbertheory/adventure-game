@@ -228,7 +228,6 @@ class App:
             else:
                 boulder_key = self.scene_name
                 monster_key = self.scene_name
-            self.log_handler(monster_key)
             if not self.scene_setup:
                 self.initialize_scene()
             # Borders around the playable arena
