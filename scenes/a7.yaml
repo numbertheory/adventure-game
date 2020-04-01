@@ -1,0 +1,22 @@
+door_info:
+    - x: 64
+      y: 8
+      door_type: "north"
+      gate:
+        scene_name: "d7"
+        x: 64
+        y: 10
+    - x: 64
+      y: 112
+      door_type: "south"
+      gate:
+        scene_name: "a6"
+        x: 64
+        y: 10
+    - x: 152
+      y: 40
+      door_type: "east"
+      gate:
+        scene_name: "b7"
+        x: 10
+        y: 64

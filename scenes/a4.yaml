@@ -1,0 +1,8 @@
+door_info:
+    - x: 48
+      y: 8
+      door_type: "north"
+      gate:
+        scene_name: "a5"
+        x: 64
+        y: 64
