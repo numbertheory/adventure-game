@@ -1,1 +1,15 @@
-default: ""
+door_info:
+    - x: 48
+      y: 8
+      door_type: "north"
+      gate:
+        scene_name: "c4"
+        x: 48
+        y: 100
+    - x: 64
+      y: 112
+      door_type: "south"
+      gate:
+        scene_name: "c2"
+        x: 64
+        y: 10
