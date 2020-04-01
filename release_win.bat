@@ -1,4 +1,5 @@
-SET CURRENTDIR=c:\dungeon-dos-master
+SET CURRENTDIR=%cd%
+SET PYTHONPATH=%userprofile%\appdata\local\programs\python\python37\lib\site-packages
 
 pyinstaller --clean --noconfirm --log-level=WARN --onefile --noconsole --name=dungeon-dos^
   --add-data=%PYTHONPATH%\pyxel\core\bin\win64\libjpeg-9.dll;pyxel/core/bin\win64^
@@ -18,7 +19,5 @@ pyinstaller --clean --noconfirm --log-level=WARN --onefile --noconsole --name=du
   --add-data=%CURRENTDIR%\util\load_world.py;util^
   --add-data=%CURRENTDIR%\util\movable.py;util^
   game.py
-
-mkdir dist/scenes
 
 robocopy scenes dist/scenes /E

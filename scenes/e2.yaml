@@ -27,3 +27,4 @@ door_info:
         scene_name: "f2"
         x: 10
         y: 40
+ground: "tiles"

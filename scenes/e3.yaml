@@ -27,3 +27,8 @@ door_info:
         scene_name: "f3"
         x: 10
         y: 40
+ground: "swamp"
+monsters:
+    - x: 70
+      y: 20
+      monster_type: "zeep"

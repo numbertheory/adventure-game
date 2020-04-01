@@ -37,3 +37,4 @@ walls:
       y: 66
     - x: 16
       y: 74
+ground: "grass"

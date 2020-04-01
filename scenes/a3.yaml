@@ -30,6 +30,7 @@ walls:
       y: 66
     - x: 16
       y: 74
+ground: "swamp"
 monsters:
     - x: 70
       y: 20

@@ -258,7 +258,7 @@ class App:
 
             # move monsters
             for i in range(0, len(self.monsters[monster_key])):
-                if not self.monsters[monster_key][i]["dead"]:
+                if not self.monsters[monster_key][i].get('dead', False):
                     character_pixels = get_character_pixels(
                         pyxel, self.position)
                     monster_bubble = get_tile_bubble(
@@ -306,7 +306,7 @@ class App:
                 draw.door(pyxel, self.doors[i])
 
             for i in range(0, len(self.monsters[monster_key])):
-                if not self.monsters[monster_key][i]["dead"]:
+                if not self.monsters[monster_key][i].get('dead', False):
                     draw.monster(pyxel, self.monsters[monster_key][i])
 
             draw.main_character(pyxel, self.position, self.direction)

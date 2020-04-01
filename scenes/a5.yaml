@@ -13,3 +13,4 @@ door_info:
         scene_name: "a6"
         x: 64
         y: 64
+ground: "swamp"

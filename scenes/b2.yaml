@@ -13,3 +13,4 @@ door_info:
         scene_name: "c2"
         x: 10
         y: 40
+ground: "grass"

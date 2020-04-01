@@ -20,3 +20,4 @@ door_info:
         scene_name: "e7"
         x: 10
         y: 40
+ground: "tiles"

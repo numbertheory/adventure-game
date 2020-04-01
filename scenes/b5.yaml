@@ -20,3 +20,4 @@ door_info:
         scene_name: "c5"
         x: 10
         y: 40
+ground: "swamp"

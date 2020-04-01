@@ -39,3 +39,7 @@ walls:
       y: 90
     - x: 90
       y: 20
+monsters:
+    - x: 70
+      y: 20
+      monster_type: "zeep"

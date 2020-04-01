@@ -27,3 +27,7 @@ door_info:
         scene_name: "f6"
         x: 10
         y: 40
+monsters:
+    - x: 70
+      y: 20
+      monster_type: "zeep"

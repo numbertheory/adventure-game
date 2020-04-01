@@ -1,1 +1,26 @@
-default: ""
+door_info:
+    - x: 0
+      y: 64
+      door_type: "west"
+      gate:
+        scene_name: "f2"
+        x: 145
+        y: 64
+    - x: 48
+      y: 8
+      door_type: "north"
+      gate:
+        scene_name: "g3"
+        x: 48
+        y: 100
+    - x: 64
+      y: 112
+      door_type: "south"
+      gate:
+        scene_name: "g1"
+        x: 64
+        y: 10
+monsters:
+    - x: 70
+      y: 20
+      monster_type: "zeep"

@@ -72,6 +72,8 @@ def ground(pyxel, ground):
         ground_info = [[32, 8], [40, 8], [32, 16], [40, 16]]
     elif ground == "grass":
         ground_info = [[16, 8], [24, 8], [16, 16], [24, 16]]
+    elif ground == "swamp":
+        ground_info = [[16, 24], [24, 24], [16, 32], [24, 32]]
     else:
         ground_info = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
     counter = 0
