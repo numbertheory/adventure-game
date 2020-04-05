@@ -79,7 +79,7 @@ def release_to_github(tag, platform, commits=[]):
                               "tag_commitish": "master",
                               "name": "Dungeon DOS - {}".format(tag),
                               "body": "\n".join(commits),
-                              "draft": True,
+                              "draft": False,
                               "prerelease": True}).json()
     # Upload the asset
     zip_archive = "dungeon-dos-{}-{}.zip".format(platform, tag)
