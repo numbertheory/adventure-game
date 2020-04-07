@@ -119,6 +119,7 @@ def increment_last_tag(last_tag, release_type="bugfix"):
     return "v{}".format(".".join([str(x) for x in next_tag]))
 
 
+<<<<<<< HEAD
 if "-" not in detached_tag:
     print("No changes from the latest tag.")
     if platform.system().lower() == "windows":
@@ -136,3 +137,70 @@ else:
 if repo.active_branch.name != "master":
     print("This should only be run on the master branch.")
     exit(0)
+=======
+def cleanout_builds():
+    try:
+        shutil.rmtree('build/')
+    except FileNotFoundError:  # noqa: F821
+        pass
+
+    try:
+        shutil.rmtree('dist/')
+    except FileNotFoundError:  # noqa: F821
+        pass
+
+    try:
+        os.remove('dungeon-dos.spec')
+    except FileNotFoundError:  # noqa: F821
+        pass
+
+
+if platform.system().lower() == "windows":
+    print("Releasing for Windows.")
+    print("Cleaning out old build directories.")
+    cleanout_builds()
+
+    all_tags = sorted(repo.tags, key=lambda t: t.commit.committed_datetime)
+    last_tag = str(all_tags[-1])
+    next_tag = increment_last_tag(last_tag)
+    print("Preparing release for: {}".format(next_tag))
+    changed_files = [item.a_path for item in repo.index.diff(None)]
+    if len(changed_files) != 0:
+        # Don't release if there are uncommitted changes
+        print("Commit changes to git history to proceed.")
+        exit(2)
+
+    repo.create_tag(next_tag)
+    repo.remotes.origin.push(next_tag)
+
+    # Build the tagged release for Windows
+    windows_output = subprocess.Popen("release_win.bat",
+                                      shell=True,
+                                      stdout=subprocess.PIPE).stdout.read()
+    print(windows_output.decode('utf-8'))
+    zip_output = subprocess.Popen("7z a -tzip dungeon-dos-Windows10-{}.zip"
+                                  " ./dist/scenes/ "
+                                  " ./dist/dungeon-dos.exe".format(
+                                    next_tag
+                                  ),
+                                  shell=True,
+                                  stdout=subprocess.PIPE).stdout.read()
+    print(zip_output.decode('utf-8'))
+
+    # Draft a new release with the tag
+    release_to_github(next_tag, "Windows10", commits=[])
+
+elif platform.system().lower() == "linux":
+    print("Releasing for Linux.")
+    print("Cleaning out old build directories.")
+    cleanout_builds()
+    all_tags = sorted(repo.tags, key=lambda t: t.commit.committed_datetime)
+    last_tag = str(all_tags[-1])
+    next_tag = increment_last_tag(last_tag)
+    print("Preparing release for: {}".format(next_tag))
+    changed_files = [item.a_path for item in repo.index.diff(None)]
+    if len(changed_files) != 0:
+        # Don't release if there are uncommitted changes
+        print("Commit changes to git history to proceed.")
+        exit(2)
+>>>>>>> 6dd0e0ca44043f2d7660c4a8e404602262733653
