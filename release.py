@@ -86,6 +86,9 @@ def release_windows(new_release=True):
 
         repo.create_tag(next_tag)
         repo.remotes.origin.push(next_tag)
+    else:
+        all_tags = sorted(repo.tags, key=lambda t: t.commit.committed_datetime)
+        next_tag = str(all_tags[-1])
 
     # Build the tagged release for Windows
     windows_output = subprocess.Popen("release_win.bat",
