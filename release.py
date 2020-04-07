@@ -171,7 +171,7 @@ if "-" not in detached_tag:
                 print("Nothing to be done.")
                 exit(0)
             else:
-                release_windows()
+                release_windows(new_release=False)
     elif platform.system().lower() == "linux":
         releases = get_assets_releases(detached_tag)
         for release in releases:
@@ -179,12 +179,12 @@ if "-" not in detached_tag:
                 print("Nothing to be done.")
                 exit(0)
             else:
-                release_linux()
+                release_linux(new_release=False)
 else:
     if platform.system().lower() == "windows":
-        release_windows()
+        release_windows(new_release=True)
     if platform.system().lower() == "linux":
-        release_linux()
+        release_linux(new_release=True)
 
 if repo.active_branch.name != "master":
     print("This should only be run on the master branch.")
