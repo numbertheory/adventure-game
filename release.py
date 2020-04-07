@@ -21,24 +21,32 @@ def get_assets_releases(tag):
     return [x["name"] for x in releases.json()["assets"]]
 
 
-def release_windows():
-    print("Releasing for Windows.")
+def cleanup_build():
     print("Cleaning out old build directories.")
     try:
         shutil.rmtree('build/')
-    except FileNotFoundError:
+    except FileNotFoundError: # noqa F821
         pass
 
     try:
         shutil.rmtree('dist/')
-    except FileNotFoundError:
+    except FileNotFoundError: # noqa F821
         pass
 
     try:
         os.remove('dungeon-dos.spec')
-    except FileNotFoundError:
+    except FileNotFoundError: # noqa F821
         pass
 
+
+def release_linux():
+    print("Releasing for Linux.")
+    cleanup_build()
+
+
+def release_windows():
+    print("Releasing for Windows.")
+    cleanup_build()
     all_tags = sorted(repo.tags, key=lambda t: t.commit.committed_datetime)
     last_tag = str(all_tags[-1])
     next_tag = increment_last_tag(last_tag)
@@ -129,9 +137,19 @@ if "-" not in detached_tag:
                 exit(0)
             else:
                 release_windows()
+    elif platform.system().lower() == "linux":
+        releases = get_assets_releases(detached_tag)
+        for release in releases:
+            if "Linux" in release:
+                print("Nothing to be done.")
+                exit(0)
+            else:
+                release_linux()
 else:
     if platform.system().lower() == "windows":
         release_windows()
+    if platform.system().lower() == "linux":
+        release_linux()
 
 if repo.active_branch.name != "master":
     print("This should only be run on the master branch.")
