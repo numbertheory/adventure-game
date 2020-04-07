@@ -15,9 +15,3 @@ pyinstaller --clean --noconfirm --log-level=WARN --onefile --noconsole --name=du
 game.py
 
 cp -r $PWD/scenes/ dist/
-
-mv dist/ dungeon-dos/
-
-tag=$(git describe --tags)
-
-zip -r dungeon-dos-$tag.zip dungeon-dos/*

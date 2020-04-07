@@ -42,6 +42,32 @@ def cleanup_build():
 def release_linux():
     print("Releasing for Linux.")
     cleanup_build()
+    all_tags = sorted(repo.tags, key=lambda t: t.commit.committed_datetime)
+    last_tag = str(all_tags[-1])
+    next_tag = increment_last_tag(last_tag)
+    print("Preparing release for: {}".format(next_tag))
+    changed_files = [item.a_path for item in repo.index.diff(None)]
+    if len(changed_files) != 0:
+        # Don't release if there are uncommitted changes
+        print("Commit changes to git history to proceed.")
+        exit(2)
+
+    repo.create_tag(next_tag)
+    repo.remotes.origin.push(next_tag)
+
+    # Build the tagged release for Windows
+    windows_output = subprocess.Popen("./release/release_linux.sh",
+                                      shell=True,
+                                      stdout=subprocess.PIPE).stdout.read()
+    print(windows_output.decode('utf-8'))
+    zip_output = subprocess.Popen("zip -r dungeon-dos-Linux-{}.zip "
+                                  " dist/*".format(next_tag),
+                                  shell=True,
+                                  stdout=subprocess.PIPE).stdout.read()
+    print(zip_output.decode('utf-8'))
+
+    # Draft a new release with the tag
+    release_to_github(next_tag, "Linux", commits=[])
 
 
 def release_windows():
