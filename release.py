@@ -70,23 +70,27 @@ def increment_last_tag(last_tag, release_type="bugfix"):
     return "v{}".format(".".join([str(x) for x in next_tag]))
 
 
-if platform.system().lower() == "windows":
-    print("Releasing for Windows.")
-    print("Cleaning out old build directories.")
+def cleanout_builds():
     try:
         shutil.rmtree('build/')
-    except FileNotFoundError:
+    except FileNotFoundError:  # noqa: F821
         pass
 
     try:
         shutil.rmtree('dist/')
-    except FileNotFoundError:
+    except FileNotFoundError:  # noqa: F821
         pass
 
     try:
         os.remove('dungeon-dos.spec')
-    except FileNotFoundError:
+    except FileNotFoundError:  # noqa: F821
         pass
+
+
+if platform.system().lower() == "windows":
+    print("Releasing for Windows.")
+    print("Cleaning out old build directories.")
+    cleanout_builds()
 
     all_tags = sorted(repo.tags, key=lambda t: t.commit.committed_datetime)
     last_tag = str(all_tags[-1])
@@ -117,3 +121,17 @@ if platform.system().lower() == "windows":
 
     # Draft a new release with the tag
     release_to_github(next_tag, "Windows10", commits=[])
+
+elif platform.system().lower() == "linux":
+    print("Releasing for Linux.")
+    print("Cleaning out old build directories.")
+    cleanout_builds()
+    all_tags = sorted(repo.tags, key=lambda t: t.commit.committed_datetime)
+    last_tag = str(all_tags[-1])
+    next_tag = increment_last_tag(last_tag)
+    print("Preparing release for: {}".format(next_tag))
+    changed_files = [item.a_path for item in repo.index.diff(None)]
+    if len(changed_files) != 0:
+        # Don't release if there are uncommitted changes
+        print("Commit changes to git history to proceed.")
+        exit(2)
