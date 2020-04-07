@@ -111,7 +111,7 @@ def release_windows(new_release=True):
 def release_to_github(tag, platform, commits=[]):
     existing_release = requests.get(
         "https://api.github.com/repos/numbertheory/"
-        "dungeon-dos/releases/{}".format(tag),
+        "dungeon-dos/releases/tags/{}".format(tag),
     )
     if not existing_release.ok:
         release = requests.post("https://api.github.com/repos/numbertheory/"
