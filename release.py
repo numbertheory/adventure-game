@@ -70,21 +70,22 @@ def release_linux():
     release_to_github(next_tag, "Linux", commits=[])
 
 
-def release_windows():
+def release_windows(new_release=True):
     print("Releasing for Windows.")
     cleanup_build()
-    all_tags = sorted(repo.tags, key=lambda t: t.commit.committed_datetime)
-    last_tag = str(all_tags[-1])
-    next_tag = increment_last_tag(last_tag)
-    print("Preparing release for: {}".format(next_tag))
-    changed_files = [item.a_path for item in repo.index.diff(None)]
-    if len(changed_files) != 0:
-        # Don't release if there are uncommitted changes
-        print("Commit changes to git history to proceed.")
-        exit(2)
+    if new_release:
+        all_tags = sorted(repo.tags, key=lambda t: t.commit.committed_datetime)
+        last_tag = str(all_tags[-1])
+        next_tag = increment_last_tag(last_tag)
+        print("Preparing release for: {}".format(next_tag))
+        changed_files = [item.a_path for item in repo.index.diff(None)]
+        if len(changed_files) != 0:
+            # Don't release if there are uncommitted changes
+            print("Commit changes to git history to proceed.")
+            exit(2)
 
-    repo.create_tag(next_tag)
-    repo.remotes.origin.push(next_tag)
+        repo.create_tag(next_tag)
+        repo.remotes.origin.push(next_tag)
 
     # Build the tagged release for Windows
     windows_output = subprocess.Popen("release_win.bat",
@@ -105,16 +106,24 @@ def release_windows():
 
 
 def release_to_github(tag, platform, commits=[]):
-    release = requests.post("https://api.github.com/repos/numbertheory/"
-                            "dungeon-dos/releases",
-                            auth=(os.getenv('GITHUB_TOKEN'), ''),
-                            json={
-                              "tag_name": tag,
-                              "tag_commitish": "master",
-                              "name": "Dungeon DOS - {}".format(tag),
-                              "body": "\n".join(commits),
-                              "draft": False,
-                              "prerelease": True}).json()
+    existing_release = requests.get(
+        "https://api.github.com/repos/numbertheory/"
+        "dungeon-dos/releases/{}".format(tag),
+    )
+    if not existing_release.ok:
+        release = requests.post("https://api.github.com/repos/numbertheory/"
+                                "dungeon-dos/releases",
+                                auth=(os.getenv('GITHUB_TOKEN'), ''),
+                                json={
+                                  "tag_name": tag,
+                                  "tag_commitish": "master",
+                                  "name": "Dungeon DOS - {}".format(tag),
+                                  "body": "\n".join(commits),
+                                  "draft": False,
+                                  "prerelease": True}).json()
+    else:
+        release = existing_release.json()
+
     # Upload the asset
     zip_archive = "dungeon-dos-{}-{}.zip".format(platform, tag)
     zip_headers = {"Content-Type": "application/zip",
