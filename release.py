@@ -170,8 +170,7 @@ if "-" not in detached_tag:
             if "Windows10" in release:
                 print("Nothing to be done.")
                 exit(0)
-            else:
-                release_windows(new_release=False)
+        release_windows(new_release=False)
     elif platform.system().lower() == "linux":
         releases = get_assets_releases(detached_tag)
         for release in releases:
